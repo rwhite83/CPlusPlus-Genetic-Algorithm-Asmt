@@ -19,6 +19,14 @@ tour::tour(int city_count) {
     }
 }
 
+double tour::determine_fitness() {
+    for (auto elem : cities_to_visit) {
+        fitness_rating += sqrt(pow(elem.second.xlong, 2) + pow(elem.second.ylat, 2));
+    }
+    double fitness_rating_ratio = 10000 * (1 / fitness_rating);
+    return fitness_rating_ratio;
+}
+
 tour &tour::operator=(const tour &tr) {
     this->cities_to_visit = tr.cities_to_visit;
     this->num_of_cities = tr.num_of_cities;
@@ -33,4 +41,3 @@ ostream &operator<<(ostream &os, const tour &tr) {
     os << endl;
     return os;
 }
-

@@ -28,5 +28,7 @@ public:
 
     friend ostream& operator<<(ostream&, const tour&);
 
+    double determine_fitness();
+
 };
 

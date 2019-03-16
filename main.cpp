@@ -12,11 +12,17 @@ int main() {
 
     tour master_test{20};
 
-    cout << master_tour;
+    double wubbs = master_test.determine_fitness();
 
-    cout << master_test;
+    cout << wubbs;
 
-    travelogue{5, master_tour};
+//    cout << master_tour;
+//
+//    cout << master_test;
+//
+//    cout << master_test.fitness_rating;
+
+    //travelogue{5, master_tour};
 
     return 0;
 }
