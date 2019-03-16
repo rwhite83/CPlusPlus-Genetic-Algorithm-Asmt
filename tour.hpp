@@ -15,15 +15,10 @@ class tour {
 public:
 
     map<char, city> cities_to_visit;
-    map<int, city> tour_map;
 
     double fitness_rating;
 
-    tour generate_tour(int);
-
-    tour generate_master_tour();
-
-    void print_master_tour();
+    tour(int);
 
     friend ostream& operator<<(ostream&, const tour&);
 

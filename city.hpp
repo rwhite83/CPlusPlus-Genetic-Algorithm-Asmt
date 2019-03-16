@@ -22,9 +22,5 @@ public:
 
     city();
 
-    //void generate_master_list();
-
-    //friend ostream& operator<<(ostream&, const &);
-
 };
 

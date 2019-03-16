@@ -10,9 +10,9 @@ class travelogue {
 
 public:
 
-    travelogue generate_travelogue(double);
-
-    friend ostream& operator<<(ostream&, const travelogue&);
+//    travelogue generate_travelogue(double);
+//
+//    friend ostream& operator<<(ostream&, const travelogue&);
 
 };
 

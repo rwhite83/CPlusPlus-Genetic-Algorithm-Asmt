@@ -5,16 +5,9 @@
 
 int main() {
 
-    //tour master_tour{};
+    const tour master_tour{20};
 
-    tour sample_tour{};
-
-    sample_tour.generate_tour(5);
-
-    //master_tour.generate_master_tour();
-
-    //master_tour.print_master_tour();
-    cout << sample_tour;
+    cout << master_tour;
 
     return 0;
 }
