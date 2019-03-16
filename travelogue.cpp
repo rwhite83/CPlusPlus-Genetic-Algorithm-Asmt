@@ -31,17 +31,11 @@ travelogue::travelogue(int num_of_shuffles, tour master_tour) {
             randomized_tour_to_add.cities_to_visit.insert(make_pair(letter, j));
             letter ++;
         }
-        cout << randomized_tour_to_add;
+        double temp_tour = randomized_tour_to_add.determine_fitness();
+        if (temp_tour > fittest_tour) {
+            fittest_tour = temp_tour;
+        }
         city_randomizer.clear();
         cout << endl;
     }
 }
-
-//ostream &operator<<(ostream &os, const travelogue &tr) {
-////    for (auto elem : travelogue_vector) {
-////        //cout << elem;
-////        //os << elem << "d" << "\n";
-////    }
-////    os << endl;
-//    return os;
-//}

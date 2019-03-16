@@ -13,7 +13,9 @@ class travelogue {
 
 public:
 
-    travelogue(int, tour);;
+    double fittest_tour = 0;
+
+    travelogue(int, tour);
 
     friend ostream& operator<<(ostream&, const travelogue&);
 

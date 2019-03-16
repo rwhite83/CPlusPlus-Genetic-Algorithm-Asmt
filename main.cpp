@@ -12,9 +12,9 @@ int main() {
 
     tour master_test{20};
 
-    double wubbs = master_test.determine_fitness();
-
-    cout << wubbs;
+//    double wubbs = master_test.determine_fitness();
+//
+//    cout << wubbs;
 
 //    cout << master_tour;
 //
@@ -22,7 +22,9 @@ int main() {
 //
 //    cout << master_test.fitness_rating;
 
-    //travelogue{5, master_tour};
+    travelogue wonder_trip {5, master_tour};
+
+    cout << wonder_trip.fittest_tour << endl;
 
     return 0;
 }
