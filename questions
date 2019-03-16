@@ -1,0 +1,3 @@
+why when i instantiate a new class of tour, does it have another instantiation's version of something without it being static?
+when i instantiate a regular tour, then instnatiate a second tour, why does the second have access to the firsts?
+does this have something to do with my not being able to place my variables in the header file?
