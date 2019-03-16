@@ -21,5 +21,11 @@ city::city() {
     this->ylat = make_random();
 }
 
+//void swap(const city& city1, const city& city2) {
+//    city temp = city1;
+//    city1 = city2;
+//    city2 = temp;
+//}
+
 
 

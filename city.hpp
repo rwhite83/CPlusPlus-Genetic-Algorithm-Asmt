@@ -22,5 +22,7 @@ public:
 
     city();
 
+    void swap(const city&, const city&);
+
 };
 

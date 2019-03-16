@@ -14,11 +14,17 @@ class tour {
 
 public:
 
+    int num_of_cities;
+
     map<char, city> cities_to_visit;
 
     double fitness_rating;
 
+    tour();
+
     tour(int);
+
+    tour &operator=(const tour &tr);
 
     friend ostream& operator<<(ostream&, const tour&);
 

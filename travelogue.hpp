@@ -4,15 +4,18 @@
 
 #pragma once
 
+#include "city.hpp"
+#include "tour.hpp"
+
 using namespace std;
 
 class travelogue {
 
 public:
 
-//    travelogue generate_travelogue(double);
-//
-//    friend ostream& operator<<(ostream&, const travelogue&);
+    travelogue(int, tour);;
+
+    friend ostream& operator<<(ostream&, const travelogue&);
 
 };
 
