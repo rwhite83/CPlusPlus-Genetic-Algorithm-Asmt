@@ -8,7 +8,6 @@
 
 using namespace std;
 
-
 struct city {
 
 private:
@@ -17,12 +16,17 @@ private:
 
 public:
 
+    string cityName;
     double xlong;
     double ylat;
 
     city();
 
-    void swap(const city&, const city&);
+    void swap(const city &, const city &);
+
+    string gen_random();
+
+    friend ostream& operator<<(ostream&, const city&);
 
 };
 

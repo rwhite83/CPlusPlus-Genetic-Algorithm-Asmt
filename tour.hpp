@@ -15,20 +15,28 @@ class tour {
 public:
 
     int num_of_cities;
-
-    map<char, city> cities_to_visit;
-
+    string city_desig = "";
     double fitness_rating;
 
+    vector<city*> vector_cities_pointers;
+
+    map<string, city> cities_to_visit;
+
+    vector<city> vector_cities_to_visit;
+    vector<pair<double,double>> coordinate_vector;
+    vector<string> city_vector;
+
     tour();
-
-    tour(int);
-
-    tour &operator=(const tour &tr);
-
-    friend ostream& operator<<(ostream&, const tour&);
+    tour(city[], int);
+    //explicit tour(int);
 
     double determine_fitness();
+    double get_tour_distance();
+    void shuffle_cities();
+    double get_distance_between_cities(city, city);
+    bool contains_city(city);
 
+    tour &operator=(const tour &tr);
+    friend ostream& operator<<(ostream&, const tour&);
 };
 

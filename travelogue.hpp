@@ -13,11 +13,14 @@ class travelogue {
 
 public:
 
-    double fittest_tour = 0;
+    vector<tour *> travelogue_vector;
 
-    travelogue(int, tour);
+    double fittest_tour_ratio = 0;
+    double fittest_tour_distance = 0;
 
-    friend ostream& operator<<(ostream&, const travelogue&);
+    travelogue(city[], int, int, int);
+
+    void kill_me();
 
 };
 

@@ -6,36 +6,49 @@
 #include <algorithm>
 #include "travelogue.hpp"
 #include <random>
+#include "tour.hpp"
 
 
 using namespace std;
 
-/////////why does this have to be here and not in the header???///////////
-vector<tour> travelogue_vector;
+travelogue::travelogue(city base_city_list[], int num_of_cities, int population_size, int num_of_shuffles) {
+    
+    tour::tour(city base_city_list[], int city_count) {
+        city *city_pointer;
 
-vector<city> city_randomizer;
 
-int my_random {5};
+    // sets a base distance
+    fittest_tour_distance = master_tour.get_tour_distance();
 
-travelogue::travelogue(int num_of_shuffles, tour master_tour) {
 
+
+    // populates a vector with randomized versions of master tour
     for (int i = 0; i < num_of_shuffles; i++) {
-        for(auto i : master_tour.cities_to_visit) {
-            city_randomizer.push_back(i.second);
+
+        // create a new tour and re-adds randomized elements into it
+        tour randomized_tour_to_add = master_tour;
+        randomized_tour_to_add.shuffle_cities();
+
+        // sets calculates distance travelled and inverted ratio
+        double temp_tour_ratio = randomized_tour_to_add.determine_fitness();
+        double temp_tour_distance = randomized_tour_to_add.get_tour_distance();
+
+        // checks if they beat the existing value, and updates if they do
+        if (temp_tour_ratio > fittest_tour_ratio) {
+            fittest_tour_ratio = temp_tour_ratio;
         }
-        using std::swap;
-        std::random_shuffle(city_randomizer.begin(), city_randomizer.end());
-        tour randomized_tour_to_add;
-        char letter = '\u0041';
-        for (auto j : city_randomizer) {
-            randomized_tour_to_add.cities_to_visit.insert(make_pair(letter, j));
-            letter ++;
+        if (temp_tour_distance < fittest_tour_distance) {
+            fittest_tour_distance = temp_tour_distance;
         }
-        double temp_tour = randomized_tour_to_add.determine_fitness();
-        if (temp_tour > fittest_tour) {
-            fittest_tour = temp_tour;
-        }
-        city_randomizer.clear();
-        cout << endl;
+        travelogue_vector.push_back(new tour(randomized_tour_to_add));
     }
+    cout << travelogue_vector.size() << endl;
+}
+
+// deletes all of the pointers in the vector and clears the vector
+void travelogue::kill_me() {
+    for (auto elem : travelogue_vector) {
+        delete(elem);
+    }
+    travelogue_vector.clear();
 }
