@@ -26,6 +26,9 @@ public:
 
     string gen_random();
 
+    city &operator=(const city&);
+    friend bool operator!=(const city&, const city&);
+    friend bool operator==(const city&, const city&);
     friend ostream& operator<<(ostream&, const city&);
 
 };

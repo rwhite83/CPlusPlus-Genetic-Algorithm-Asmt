@@ -17,6 +17,7 @@ public:
     int num_of_cities;
     string city_desig = "";
     double fitness_rating;
+    double travel_distance;
 
     vector<city*> vector_cities_pointers;
 
@@ -36,7 +37,11 @@ public:
     double get_distance_between_cities(city, city);
     bool contains_city(city);
 
-    tour &operator=(const tour &tr);
+    bool operator!=(tour);
+    bool operator==(tour);
+    tour &operator=(const tour&);
     friend ostream& operator<<(ostream&, const tour&);
+
+    //void kill_me();
 };
 

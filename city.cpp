@@ -23,7 +23,7 @@ double city::make_random() {
 }
 
 string city::gen_random() {
-    char s [9];
+    char s[9];
     stringstream ss;
     static const char alphanum[] =
             "0123456789"
@@ -33,6 +33,33 @@ string city::gen_random() {
         ss << alphanum[rand() % (sizeof(alphanum) - 1)];
     }
     return ss.str();
+}
+
+bool operator!=(const city &lhs_city, const city &rhs_city) {
+    bool is_not_equal = true;
+    if ((lhs_city.ylat != rhs_city.ylat)
+        && (lhs_city.xlong != rhs_city.xlong)
+        && (lhs_city.cityName.compare(rhs_city.cityName) != 0)) {
+        bool is_not_equal = false;
+    }
+    return is_not_equal;
+}
+
+bool operator==(const city &lhs_city, const city &rhs_city) {
+    bool is_equal = true;
+    if ((lhs_city.ylat == rhs_city.ylat)
+        && (lhs_city.xlong == rhs_city.xlong)
+        && (lhs_city.cityName.compare(rhs_city.cityName) == 0)) {
+        bool is_not_equal = false;
+    }
+    return is_equal;
+}
+
+city &city::operator=(const city &cty) {
+    this->cityName = cty.cityName;
+    this->ylat = cty.ylat;
+    this->xlong = cty.xlong;
+    return *this;
 }
 
 ostream &operator<<(ostream &os, const city &cty) {

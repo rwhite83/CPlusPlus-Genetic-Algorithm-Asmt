@@ -10,10 +10,11 @@ int main() {
 
     srand(time(NULL));
 
-    int cities_in_tour = 32;
-    int population_size = 32;
-    int mutation_rate = 0.15;
+    int cities_in_tour = 6;
+    int population_size = 6;
+    float mutation_rate = 0.15;
     int number_of_shuffles = 64;
+    int parent_pool_size = 6;
     int number_of_iterations = 1000;
     int number_of_parents;
     int number_of_elites = 1;
@@ -46,6 +47,7 @@ int main() {
     }
      */
 
+
     //const tour master_tour{cities_in_tour};
 
     //cout << master_tour << endl;
@@ -67,25 +69,54 @@ int main() {
 
     city master_list [cities_in_tour];
 
-    for (auto elem : master_list) {
-        cout << elem << endl;
-    }
+//    for (auto elem : master_list) {
+//        cout << elem << endl;
+//    }
 
-    tour new_tour  = tour(master_list, cities_in_tour);
+//    tour new_tour  = tour(master_list, cities_in_tour);
+//
+//    cout << new_tour.get_tour_distance() << endl;
+//    cout << new_tour.determine_fitness() << endl;
 
-    cout << new_tour.get_tour_distance() << endl;
-    cout << new_tour.determine_fitness() << endl;
+    travelogue new_travelogue{master_list, cities_in_tour, population_size, number_of_shuffles};
 
-    new_tour.shuffle_cities();
+    cout << new_travelogue;
+//
+//    cout << new_travelogue.fittest_tour_distance << endl;
+//
+//    cout << "elite tour: \n" << *new_travelogue.move_elite_to_front() << endl;
+//
+//    cout << new_travelogue << endl;
+//
+//    cout << endl;
+//
+////    cout << "a parent tour: \n" << *new_travelogue.move_elite_to_front();
+////
+//    cout << endl;
+//
+//    //cout << new_travelogue;
+//
+//    travelogue mommy = new_travelogue.get_parent(population_size);
+//
+//    travelogue daddy = new_travelogue.get_parent(population_size);
 
-    cout << new_tour << endl;
+    //cout << "mommy: \n" << mommy << endl;
 
-    cout << new_tour.get_tour_distance() << endl;
-    cout << new_tour.determine_fitness() << endl;
+    //cout << "daddy: \n" << daddy << endl;
 
-    city newCity;
+    //cout << "elite tour momomy: \n" <<
 
-    //cout << newCity.gen_random();
+//    *mommy.move_elite_to_front();
+
+    //cout << "elite tour daddy: \n" <<
+    //
+    // *daddy.move_elite_to_front();
+
+//    tour baby_tour = travelogue::make_a_mutant_baby(&mommy, &daddy, cities_in_tour, mutation_rate);
+
+//    cout << "baby tour: \n" << baby_tour;
+
+    cout << "this happened" << mutation_rate;
 
     return 0;
 }

@@ -40,7 +40,6 @@ void tour::shuffle_cities() {
     random_shuffle(vector_cities_pointers.begin(), vector_cities_pointers.end());
 }
 
-
 double tour::get_distance_between_cities(city city_origin, city city_destination) {
     return sqrt(pow(city_origin.xlong, 2) + pow(city_destination.ylat, 2));
 }
@@ -51,10 +50,37 @@ bool tour::contains_city(city city_to_check) {
     }
 }
 
+bool operator!=(tour &lhs_tour, tour &rhs_tour) {
+    bool is_not_equal = true;
+    for (int i = 0; i < lhs_tour.num_of_cities; i++) {
+        if ((lhs_tour.vector_cities_pointers.at(i)->cityName.compare(
+                rhs_tour.vector_cities_pointers.at(i)->cityName) == 0)
+            || (lhs_tour.vector_cities_pointers.at(i)->ylat == (rhs_tour.vector_cities_pointers.at(i)->ylat)
+                || (lhs_tour.vector_cities_pointers.at(i)->xlong == (rhs_tour.vector_cities_pointers.at(i)->xlong)))) {
+            bool is_not_equal = false;
+        }
+        return is_not_equal;
+    }
+}
+
+bool operator==(tour &lhs_tour, tour &rhs_tour) {
+    bool is_equal = true;
+    for (int i = 0; i < lhs_tour.num_of_cities; i++) {
+        if ((!lhs_tour.vector_cities_pointers.at(i)->cityName.compare(
+                rhs_tour.vector_cities_pointers.at(i)->cityName) == 0)
+            || (!lhs_tour.vector_cities_pointers.at(i)->ylat == (rhs_tour.vector_cities_pointers.at(i)->ylat)
+                || (!lhs_tour.vector_cities_pointers.at(i)->xlong == (rhs_tour.vector_cities_pointers.at(i)->xlong)))) {
+            bool is_equal = false;
+        }
+        return is_equal;
+    }
+}
+
 tour &tour::operator=(const tour &tr) {
     this->cities_to_visit = tr.cities_to_visit;
     this->num_of_cities = tr.num_of_cities;
     this->fitness_rating = tr.fitness_rating;
+    this->vector_cities_pointers = tr.vector_cities_pointers;
     return *this;
 }
 
@@ -62,10 +88,20 @@ ostream &operator<<(ostream &os, const tour &tr) {
     for (auto elem : tr.vector_cities_pointers) {
         os << "name: " << elem->cityName << " lattitude: " << elem->ylat << " longitude: " << elem->xlong << endl;
     }
-    os << endl;
     return os;
 }
 
+
+
+
+
+// do i have to kill the pointers in the pointers i'm killing?
+//void tour::kill_me() {
+//    for (auto elem : travelogue_vector) {
+//        delete(elem);
+//    }
+//    travelogue_vector.clear();
+//}
 
 
 
