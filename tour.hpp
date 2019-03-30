@@ -36,12 +36,11 @@ public:
     void shuffle_cities();
     double get_distance_between_cities(city, city);
     bool contains_city(city);
+    void mutate_the_baby(float);
 
     bool operator!=(tour);
     bool operator==(tour);
     tour &operator=(const tour&);
     friend ostream& operator<<(ostream&, const tour&);
-
-    //void kill_me();
 };
 

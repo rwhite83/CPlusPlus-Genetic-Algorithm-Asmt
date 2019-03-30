@@ -48,73 +48,19 @@ int main() {
      */
 
 
-    //const tour master_tour{cities_in_tour};
-
-    //cout << master_tour << endl;
-
-//    tour tour_test(cities_in_tour);
-//
-//    cout << tour_test << endl;
-//
-//    tour_test.shuffle_cities();
-//
-//    cout << tour_test << endl;
-//
-//    travelogue wonder_trip {population_size, master_tour};
-//
-//    cout << wonder_trip.fittest_tour_distance << "\n" << wonder_trip.fittest_tour_ratio << endl;
-//
-//    wonder_trip.kill_me();
-
-
     city master_list [cities_in_tour];
-
-//    for (auto elem : master_list) {
-//        cout << elem << endl;
-//    }
-
-//    tour new_tour  = tour(master_list, cities_in_tour);
-//
-//    cout << new_tour.get_tour_distance() << endl;
-//    cout << new_tour.determine_fitness() << endl;
 
     travelogue new_travelogue{master_list, cities_in_tour, population_size, number_of_shuffles};
 
+    new_travelogue.move_elite_to_front();
+
     cout << new_travelogue;
-//
-//    cout << new_travelogue.fittest_tour_distance << endl;
-//
-//    cout << "elite tour: \n" << *new_travelogue.move_elite_to_front() << endl;
-//
-//    cout << new_travelogue << endl;
-//
-//    cout << endl;
-//
-////    cout << "a parent tour: \n" << *new_travelogue.move_elite_to_front();
-////
-//    cout << endl;
-//
-//    //cout << new_travelogue;
-//
-//    travelogue mommy = new_travelogue.get_parent(population_size);
-//
-//    travelogue daddy = new_travelogue.get_parent(population_size);
 
-    //cout << "mommy: \n" << mommy << endl;
+    cout << "\n\n\nwubbalubbadubdub\n\n\n" << endl;
 
-    //cout << "daddy: \n" << daddy << endl;
+    travelogue hip_new_travelogue = new_travelogue.master_function(new_travelogue, population_size, mutation_rate);
 
-    //cout << "elite tour momomy: \n" <<
-
-//    *mommy.move_elite_to_front();
-
-    //cout << "elite tour daddy: \n" <<
-    //
-    // *daddy.move_elite_to_front();
-
-//    tour baby_tour = travelogue::make_a_mutant_baby(&mommy, &daddy, cities_in_tour, mutation_rate);
-
-//    cout << "baby tour: \n" << baby_tour;
+    cout << hip_new_travelogue << endl;
 
     cout << "this happened" << mutation_rate;
 

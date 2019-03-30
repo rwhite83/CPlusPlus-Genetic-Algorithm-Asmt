@@ -50,6 +50,32 @@ bool tour::contains_city(city city_to_check) {
     }
 }
 
+void tour::mutate_the_baby(float mutation_rate) {
+    random_device rd;
+    mt19937 generator(rd());
+
+    double mutation_rate_percentage = mutation_rate * 100;
+
+    for (int m = 1; m < vector_cities_pointers.size() - 1; m++) {
+        uniform_int_distribution<> mutation_distribution(0, 99);
+        double mutation_check = mutation_distribution(generator);
+        if (mutation_check > mutation_rate_percentage) {
+            city *temp_city{};
+            temp_city = this->vector_cities_pointers.at(m);
+            this->vector_cities_pointers.at(m) = this->vector_cities_pointers.at(m + 1);
+            this->vector_cities_pointers.at(m + 1) = temp_city;
+        }
+    }
+    uniform_int_distribution<> mutation_distribution(0, 99);
+    double mutation_check = mutation_distribution(generator);
+    if (mutation_check > mutation_rate_percentage) {
+        city *temp_city{};
+        temp_city = this->vector_cities_pointers.at(0);
+        this->vector_cities_pointers.at(0) = this->vector_cities_pointers.at(this->vector_cities_pointers.size() - 1);
+        this->vector_cities_pointers.at(this->vector_cities_pointers.size() - 1) = temp_city;
+    }
+}
+
 bool operator!=(tour &lhs_tour, tour &rhs_tour) {
     bool is_not_equal = true;
     for (int i = 0; i < lhs_tour.num_of_cities; i++) {
@@ -90,83 +116,3 @@ ostream &operator<<(ostream &os, const tour &tr) {
     }
     return os;
 }
-
-
-
-
-
-// do i have to kill the pointers in the pointers i'm killing?
-//void tour::kill_me() {
-//    for (auto elem : travelogue_vector) {
-//        delete(elem);
-//    }
-//    travelogue_vector.clear();
-//}
-
-
-
-
-
-
-
-
-
-
-
-
-//tour::tour(int city_count) {
-//    num_of_cities = city_count;
-//    for (int i = 0; i < city_count; i++) {
-//        city_desig = string("city: ") + to_string(i) + string(": ");
-//        city new_city{};
-//        cities_to_visit.insert(make_pair(city_desig, new_city));
-//    }
-//}
-
-//tour::tour(city base_city_list[], int city_count) {
-//    city *city_pointer;
-//    for (int i = 0; i < city_count; i++) {
-//        city *city_pointer = &base_city_list[i];
-//        vector_cities_pointers.push_back(city_pointer);
-//        coordinate_vector.push_back(make_pair(base_city_list[i].ylat, base_city_list.xlong));
-//        city_vector.push_back(base_city_list[i].cityName);
-//    }
-//    random_shuffle(coordinate_vector.begin(), coordinate_vector.end());
-//    random_shuffle(city_vector.begin(), city_vector.end());
-//    random_shuffle(vector_cities_pointers.begin(), vector_cities_pointers.end());
-//}
-
-//double tour::get_tour_distance() {
-//    for (auto elem : cities_to_visit) {
-//        fitness_rating += get_distance_between_cities(elem.second, elem.second);
-//    }
-//    return fitness_rating;
-//}
-
-
-//double tour::determine_fitness() {
-//    for (auto elem : cities_to_visit) {
-//        fitness_rating += get_distance_between_cities(elem.second, elem.second);
-//    }
-//    double fitness_rating_ratio = 10000 * (1 / fitness_rating);
-//    return fitness_rating_ratio;
-//}
-
-
-//void tour::shuffle_cities() {
-//
-//    vector<city> city_randomizer;
-//
-//    for (auto i : cities_to_visit) {
-//        city_randomizer.push_back(i.second);
-//    }
-//
-//    random_shuffle(city_randomizer.begin(), city_randomizer.end());
-//
-//    cities_to_visit.clear();
-//
-//    for (int i = 0; i < city_randomizer.size(); i++) {
-//        city_desig = string("city: ") + to_string(i) + string(": ");
-//        cities_to_visit.insert(make_pair(city_desig, city_randomizer.at(i)));
-//    }
-//}

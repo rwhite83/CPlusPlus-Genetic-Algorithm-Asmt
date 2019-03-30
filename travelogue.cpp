@@ -79,7 +79,7 @@ travelogue travelogue::get_parent(int pop_size) {
     return parent_travelogue;
 }
 
-tour travelogue::make_a_mutant_baby(travelogue *mommy, travelogue *daddy, int city_count, double mutation_rate) {
+tour travelogue::make_a_baby(travelogue *mommy, travelogue *daddy, int city_count, double mutation_rate) {
     random_device rd;
     mt19937 generator(rd());
     uniform_int_distribution<> distribution_start(0, city_count - 1);
@@ -97,52 +97,30 @@ tour travelogue::make_a_mutant_baby(travelogue *mommy, travelogue *daddy, int ci
         bool matching = false;
         for (int m = 0; m < baby_tour.vector_cities_pointers.size(); m++) {
             if (*elite_daddy->vector_cities_pointers.at(h) != *baby_tour.vector_cities_pointers.at(m)) {
-
                 matching = true;
             }
         }
         if (matching) {
             baby_tour.vector_cities_pointers.push_back(elite_daddy->vector_cities_pointers.at(h));
-
         }
     }
-
-    cout << baby_tour << endl;
-
-    double mutation_rate_percentage = mutation_rate * 100;
-
-    for (int m = 0; m < city_count - 1; m++) {
-        uniform_int_distribution<> mutation_distribution(0, 99);
-        double mutation_check = mutation_distribution(generator);
-        if (mutation_check > mutation_rate_percentage) {
-            cout << "mutation_check: " << mutation_check << " " << "mutation_rate_percentage: "
-                 << mutation_rate_percentage << endl;
-            city temp_city{};
-            temp_city = *baby_tour.vector_cities_pointers.at(m);
-            *baby_tour.vector_cities_pointers.at(m) = *baby_tour.vector_cities_pointers.at(m + 1);
-            *baby_tour.vector_cities_pointers.at(m + 1) = temp_city;
-        }
-    }
-    uniform_int_distribution<> mutation_distribution(0, 99);
-    double mutation_check = mutation_distribution(generator);
-    city temp_city{};
-    temp_city = *baby_tour.vector_cities_pointers.at(city_count - 1);
-    *baby_tour.vector_cities_pointers.at(city_count - 1) = *baby_tour.vector_cities_pointers.at(0);
-    *baby_tour.vector_cities_pointers.at(0) = temp_city;
     return baby_tour;
 }
 
-
-travelogue travelogue::master_function(travelogue travelogue_to_master_all_over, int cities_in_tour, float mutation_rate){
+travelogue travelogue::master_function(travelogue travelogue_to_master_all_over, int population_size, float mutation_rate){
     travelogue_to_master_all_over.move_elite_to_front();
-    for(int i = 1; i < cities_in_tour; i++) {
-        travelogue mommy_travelogue = travelogue_to_master_all_over.get_parent(cities_in_tour);
-        travelogue daddy_travelogue = travelogue_to_master_all_over.get_parent(cities_in_tour);
+
+    for(int i = 1; i < population_size; i++) {
+        travelogue mommy_travelogue = travelogue_to_master_all_over.get_parent(population_size);
+        travelogue daddy_travelogue = travelogue_to_master_all_over.get_parent(population_size);
         mommy_travelogue.move_elite_to_front();
         daddy_travelogue.move_elite_to_front();
-        tour mutant_baby_tour = make_a_mutant_baby(&mommy_travelogue, &daddy_travelogue, cities_in_tour, mutation_rate);
-        this->travelogue_vector.at(i) = &mutant_baby_tour;
+        tour baby_tour;
+        baby_tour = make_a_baby(&mommy_travelogue, &daddy_travelogue, population_size, mutation_rate);
+        baby_tour.mutate_the_baby(mutation_rate);
+        *travelogue_vector.at(i) = baby_tour;
     }
+    travelogue_to_master_all_over.move_elite_to_front();
     return travelogue_to_master_all_over;
 }
 
