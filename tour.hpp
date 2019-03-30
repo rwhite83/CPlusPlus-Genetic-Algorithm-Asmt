@@ -29,14 +29,13 @@ public:
 
     tour();
     tour(city[], int);
-    //explicit tour(int);
 
     double determine_fitness();
     double get_tour_distance();
     void shuffle_cities();
     double get_distance_between_cities(city, city);
     bool contains_city(city);
-    void mutate_the_baby(float);
+    void mutate_the_baby(float, int);
 
     bool operator!=(tour);
     bool operator==(tour);

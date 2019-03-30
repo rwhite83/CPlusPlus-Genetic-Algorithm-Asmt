@@ -36,21 +36,21 @@ string city::gen_random() {
 }
 
 bool operator!=(const city &lhs_city, const city &rhs_city) {
-    bool is_not_equal = true;
-    if ((lhs_city.ylat != rhs_city.ylat)
-        && (lhs_city.xlong != rhs_city.xlong)
-        && (lhs_city.cityName.compare(rhs_city.cityName) != 0)) {
-        bool is_not_equal = false;
-    }
-    return is_not_equal;
+//    bool is_not_equal = true;
+//    if ((lhs_city.ylat != rhs_city.ylat)
+//        && (lhs_city.xlong != rhs_city.xlong)
+//        && (lhs_city.cityName.compare(rhs_city.cityName) != 0)) {
+//        is_not_equal = false;
+//    }
+    return !operator==(lhs_city,rhs_city);
 }
 
 bool operator==(const city &lhs_city, const city &rhs_city) {
-    bool is_equal = true;
+    bool is_equal = false;
     if ((lhs_city.ylat == rhs_city.ylat)
         && (lhs_city.xlong == rhs_city.xlong)
         && (lhs_city.cityName.compare(rhs_city.cityName) == 0)) {
-        bool is_not_equal = false;
+        is_equal = true;
     }
     return is_equal;
 }

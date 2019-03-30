@@ -10,14 +10,11 @@ int main() {
 
     srand(time(NULL));
 
-    int cities_in_tour = 6;
-    int population_size = 6;
+    int cities_in_tour = 32;
+    int population_size = 32;
     float mutation_rate = 0.15;
-    int number_of_shuffles = 64;
-    int parent_pool_size = 6;
+    int number_of_shuffles = 1;
     int number_of_iterations = 1000;
-    int number_of_parents;
-    int number_of_elites = 1;
 
     /*
     cout << "please enter the number of cities, enter 0 for default: " << endl;
@@ -47,22 +44,13 @@ int main() {
     }
      */
 
-
     city master_list [cities_in_tour];
 
     travelogue new_travelogue{master_list, cities_in_tour, population_size, number_of_shuffles};
 
-    new_travelogue.move_elite_to_front();
+    travelogue hip_new_travelogue = new_travelogue.master_function(new_travelogue, population_size, mutation_rate, number_of_iterations, number_of_shuffles);
 
-    cout << new_travelogue;
-
-    cout << "\n\n\nwubbalubbadubdub\n\n\n" << endl;
-
-    travelogue hip_new_travelogue = new_travelogue.master_function(new_travelogue, population_size, mutation_rate);
-
-    cout << hip_new_travelogue << endl;
-
-    cout << "this happened" << mutation_rate;
+    cout << "minimum distance for given tour is: " << hip_new_travelogue.fittest_tour_distance << endl;
 
     return 0;
 }

@@ -50,29 +50,35 @@ bool tour::contains_city(city city_to_check) {
     }
 }
 
-void tour::mutate_the_baby(float mutation_rate) {
+void tour::mutate_the_baby(float mutation_rate, int shuffles) {
+    int minimum_mutations_count = 0;
     random_device rd;
     mt19937 generator(rd());
 
     double mutation_rate_percentage = mutation_rate * 100;
 
-    for (int m = 1; m < vector_cities_pointers.size() - 1; m++) {
+    while (minimum_mutations_count < shuffles) {
+        for (int m = 1; m < vector_cities_pointers.size() - 1; m++) {
+            uniform_int_distribution<> mutation_distribution(0, 99);
+            double mutation_check = mutation_distribution(generator);
+            if (mutation_check > mutation_rate_percentage) {
+                ++minimum_mutations_count;
+                city *temp_city{};
+                temp_city = this->vector_cities_pointers.at(m);
+                this->vector_cities_pointers.at(m) = this->vector_cities_pointers.at(m + 1);
+                this->vector_cities_pointers.at(m + 1) = temp_city;
+            }
+        }
         uniform_int_distribution<> mutation_distribution(0, 99);
         double mutation_check = mutation_distribution(generator);
         if (mutation_check > mutation_rate_percentage) {
+            ++minimum_mutations_count;
             city *temp_city{};
-            temp_city = this->vector_cities_pointers.at(m);
-            this->vector_cities_pointers.at(m) = this->vector_cities_pointers.at(m + 1);
-            this->vector_cities_pointers.at(m + 1) = temp_city;
+            temp_city = this->vector_cities_pointers.at(0);
+            this->vector_cities_pointers.at(0) = this->vector_cities_pointers.at(
+                    this->vector_cities_pointers.size() - 1);
+            this->vector_cities_pointers.at(this->vector_cities_pointers.size() - 1) = temp_city;
         }
-    }
-    uniform_int_distribution<> mutation_distribution(0, 99);
-    double mutation_check = mutation_distribution(generator);
-    if (mutation_check > mutation_rate_percentage) {
-        city *temp_city{};
-        temp_city = this->vector_cities_pointers.at(0);
-        this->vector_cities_pointers.at(0) = this->vector_cities_pointers.at(this->vector_cities_pointers.size() - 1);
-        this->vector_cities_pointers.at(this->vector_cities_pointers.size() - 1) = temp_city;
     }
 }
 

@@ -23,8 +23,7 @@ public:
     tour* move_elite_to_front();
     travelogue get_parent(int);
     static tour make_a_baby(travelogue*, travelogue*, int, double);
-    void mutate_the_baby(tour*, int, float);
-    travelogue master_function(travelogue, int, float);
+    travelogue master_function(travelogue, int, float, int, int);
 
     travelogue &operator=(const travelogue&);
     friend ostream& operator<<(ostream&, const travelogue&);
